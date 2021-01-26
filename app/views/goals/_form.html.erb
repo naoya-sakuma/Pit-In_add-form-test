@@ -37,33 +37,46 @@
     </p>
   </div>
 
-  <div>
-    <% p = 0%>
-    <%= goal.fields_for :problems do |problem| %><% p += 1 %>
-      <%= problem.label :title, "問題#{p}" %>
-      <%= problem.text_field :title %>
+
+    <%= goal.fields_for :problems do |problem| %>
+    <div id="problem-area" class="form-group">
+      <div class="unit input-group mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><%= problem.label :title, "問題" %></span>
+        </div>
+
+        <div class="problem-minus input-group-append">
+          <%= problem.text_field :title %><span class="btn btn-danger">-</span>
+        </div>
 
         <%= problem.fields_for :solutions do |solution| %>
           <%= solution.fields_for :tasks do |task| %>
             <%= task.fields_for :steps do |step| %>
-            <table>
-              <thead>
-                <td>解決案</td>
-                <td>タスク</td>
-                <td>ステップ</td>
-              </thead>
+              <table>
+                <tr>
+                  <td>解決案</td>
+                  <td>タスク</td>
+                  <td>ステップ</td>
+                </tr>
 
-              <tbody>
-                <td><%= solution.text_field :title %></td>
-                <td><%= task.text_field :title %></td>
-                <td><%= step.text_field :title %></td>
-              </tbody>
-            </table>
+                <tr>
+                  <td><%= solution.text_field :title %><span class="btn btn-danger">-</span></td>
+                  <td><%= task.text_field :title %><span class="btn btn-danger">-</span></td>
+                  <td><%= step.text_field :title %><span class="btn btn-danger">-</span></td>
+                </tr>
+
+                <tr>
+                  <td id="solution-plus" class="btn btn-primary">so+</td>
+                  <td id="task-plus" class="btn btn-primary">t+</td>
+                  <td id="step-plus" class="btn btn-primary">st+</td>
+                </tr>
+              </table>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
-
+  <div id="problem-plus" class="btn btn-primary">p+</div>
   <p class="actions"><%= goal.submit '作成' %></p>
 <% end %>

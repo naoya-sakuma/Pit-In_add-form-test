@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :daily_plans
   patch 'daily_plans', to: 'daily_plans#daily_update'
 
+  get 'test', to: 'monthly_plans#test'
+
   # get   'monthly', to: 'plans#monthly'
   # patch 'monthly', to: 'plans#monthly_update'
   # put   'monthly', to: 'plans#monthly_update'
